@@ -1,0 +1,20 @@
+include README.md SECURITY.md TESTING.md solar.example.conf .python-version
+recursive-include solar/templates *.html
+recursive-include solar/static *
+recursive-include tests *.py *.mjs
+recursive-include tests/fixtures *
+prune .solar
+prune .solar-test-suite
+prune .solar-test-browser
+prune .venv
+prune .uv-cache
+prune Chats
+prune chats
+prune agents
+prune cron_jobs
+prune pc_remote_access
+prune skills
+prune artifacts
+prune build
+prune dist
+global-exclude __pycache__ *.py[cod] *.key *.pem *.sqlite* *.enc *.log solar.conf

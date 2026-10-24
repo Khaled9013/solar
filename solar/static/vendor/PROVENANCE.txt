@@ -1,0 +1,48 @@
+xterm.js and FitAddon, distributed under the MIT license in LICENSE-xterm.txt.
+Source: https://github.com/xtermjs/xterm.js
+Vendored from the xterm module distributed with the locally installed Playwright
+trace viewer. Only the bundler's common-JS helper import has been inlined.
+The module and CSS are served locally; browsers contact no CDN.
+
+PDF.js / pdfjs-dist 5.6.205
+Source: https://github.com/mozilla/pdf.js
+Distribution: https://www.npmjs.com/package/pdfjs-dist/v/5.6.205
+pdf.min.mjs and pdf.worker.min.mjs are the unmodified legacy/build distribution
+(includes compatibility polyfills); cmaps, standard_fonts and wasm are copied
+from the same installed package. Apache-2.0: LICENSE-pdfjs-dist.txt.
+Font and decoder notices are retained alongside their files in pdfjs/.
+
+Marked 17.0.5
+Source: https://github.com/markedjs/marked/tree/v17.0.5
+marked.esm.js is the unmodified package distribution. MIT: LICENSE-marked.txt.
+Solar uses the lexer with its own DOM renderer, not Marked HTML output.
+
+Three.js r186
+Source: https://github.com/mrdoob/three.js/tree/r186
+three.core.js and three.module.js are upstream build files. OrbitControls,
+STLLoader, OBJLoader, PLYLoader, GLTFLoader, BufferGeometryUtils and SkeletonUtils
+are upstream examples/jsm modules. Imports were changed to local relative paths;
+the algorithms are otherwise unmodified. MIT: LICENSE-three.txt.
+
+occt-import-js / OpenCascade
+Source and build instructions:
+https://github.com/kovacsv/occt-import-js/tree/41e470890ae0f9dc69ac50ffd5fc73e03576f4eb
+The distribution's occt-import-js.js is unmodified. Its matching wasm is installed
+on first startup from that commit's dist/occt-import-js.wasm. Pinned size:
+7,604,031 bytes. Git blob SHA-1: 29458885e6b030850d352cff33ab0c22a7e36c35.
+The binding and its corresponding source are under LGPL-2.1; see
+LICENSE-occt-import-js.txt. OpenCascade is LGPL-2.1 with its additional exception;
+see LICENSE-occt.txt and LICENSE-occt-exception.txt. Its source submodule is
+https://git.dev.opencascade.org/repos/occt.git at commit
+d2abb6d844231cb8f29be6894440874a4700e4a5, also available at
+https://github.com/Open-Cascade-SAS/OCCT/tree/d2abb6d844231cb8f29be6894440874a4700e4a5
+Upstream tools/setup_emscripten_win.bat and tools/build_wasm_win_release.bat
+describe rebuilding the runtime. The separate JS/wasm module can be replaced
+with a compatible locally modified build; if doing so, update the installer pin
+in solar/viewer_assets.py to the build you have reviewed. No runtime is hidden
+inside a closed binary. Retain licenses and corresponding-source availability
+when redistributing these libraries.
+
+tests/fixtures/cube.step is upstream test/testfiles/simple-basic-cube/cube.stp
+from the same occt-import-js commit. The other preview fixtures are generated
+or authored for Solar and contain no real user data.
