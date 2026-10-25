@@ -194,22 +194,5 @@ This is a real host terminal running as the OS account that launched Solar, star
 
 Each administrator can have one running terminal, bound to the browser's sign-in session. Navigating away disconnects the view and lets you reconnect. Stop, logout, password change, account/host-access revocation, sign-in expiry, the configured idle timeout, or the run duration limit ends the process. The server retains up to 1 MB of output in memory for reconnecting; it does not save a Solar terminal transcript. Shell tools can maintain their own host history and files. Closing a browser tab is not Stop. The time limits use `execution.native_idle_seconds` and `execution.timeout_seconds`.
 
-## Remote desktop
 
-The desktop page takes no screenshot until an authorized user presses **Run**. Choose the primary display or all displays, then enable **Keyboard & mouse** for control. It supports pointer movement, dragging, clicks, scroll, common shortcuts, Unicode text entry, and fullscreen viewing. Screen frames travel over an authenticated WebSocket and are not saved by Solar.
 
-Only one browser session may hold the desktop lease. Disconnect, logout, Stop, permission revocation, an idle timeout, or the maximum session duration ends capture. Lost pointer capture releases held mouse buttons. Default stream quality is 4 FPS, at most 1600 pixels wide: this is a lightweight remote-control feature, not a video-call-quality RDP replacement.
-
-Solar must run in an unlocked interactive desktop session. Windows secure desktops/UAC/sign-in screens are not controllable. Linux display-server support and macOS screen/input permissions depend on the OS and installed capture/input libraries; these platforms have not been exercised in this workspace.
-
-## Privacy, backup, and maintenance
-
-Read [SECURITY.md](SECURITY.md) before granting host or desktop access. Users are isolated through authenticated, owner-filtered application APIs. This encryption protects stored content, but it is not end-to-end encryption and cannot hide data from the host operator who possesses the master key. Administrators can reset passwords, which is an account-takeover capability even though they cannot directly fetch another user's chat through the API.
-
-Stop Solar before taking a consistent backup of **both `solar.conf` and the complete `.solar/` directory**. Protect that backup as a secret: it contains the master key, encrypted data, password hashes, and provider credentials. Losing `.solar/master.key` makes existing encrypted data unrecoverable. Do not regenerate it over an existing database. Restore the same configuration, data, and key together, then start as the OS account that owns the files. File permissions may need to be reapplied after moving to another system.
-
-Commit source code and `uv.lock`, never your local environment or data. The lockfile supplied with this workspace is retained. To update dependencies in a normal network-enabled environment, back up, run `uv lock --upgrade`, `uv sync`, and the tests, then restart. Stop the running server before restarting with `uv run solar`; startup applies pending database migrations automatically. Refresh browser tabs after the restart.
-
-## Verification status
-
-See [TESTING.md](TESTING.md) for reproducible commands, completed checks, and limitations. The implementation has automated security/workflow tests and a real HTTP integration test against a deterministic local model server. Production startup, a current dependency audit, live external-provider inference, real desktop capture/control, and browser visual acceptance were not all possible in the managed delivery environment. This is not a claim of zero bugs or a completed independent security audit.
